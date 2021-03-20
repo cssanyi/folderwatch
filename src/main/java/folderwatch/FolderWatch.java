@@ -13,8 +13,7 @@ public class FolderWatch implements Runnable {
 	}
 
 	public void start() {
-		Thread thread = new Thread(this);
-		thread.start();
+		new Thread(this).start();
 	}
 
 	@Override
