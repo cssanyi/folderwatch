@@ -43,7 +43,7 @@
         <configuration>          
           <archive>
             <manifest>
-              <mainClass>folderwatch.FolderWatch</mainClass>
+              <mainClass>folderwatch.Main</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
