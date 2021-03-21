@@ -72,7 +72,7 @@ public class Main implements Runnable {
 	@Override
 	public void run() {
 		FolderWatcher folderWatcher = new FolderWatcherBuilder().withIncomingFolderPath(incomingFolderPath)
-				.withNextFileFactory(NextFileFactory.create(wordPairOccurenceThreshold))
+				.withNextFileFactory(NextFileFactory.getInstance(wordPairOccurenceThreshold))
 				.withExit(Exit.create(exitDelay)).build();
 
 		IntStream.rangeClosed(2, threadCount).forEach(i -> FolderWatch.create(folderWatcher).start());
