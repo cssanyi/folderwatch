@@ -4,6 +4,7 @@ import java.io.File;
 
 import folderwatch.nextfile.NextFile;
 import folderwatch.nextfile.NextFileContent;
+import folderwatch.nextfile.NextFileExit;
 import folderwatch.nextfile.NextFileIdle;
 import folderwatch.nextfile.factory.NextFileFactory;
 
@@ -109,6 +110,9 @@ public class FolderWatcher {
 	}
 
 	public synchronized NextFile getNextFile() {
+		if (exit.activated()) {
+			return new NextFileExit();
+		}
 		for (String name : incomingFolder.list()) {
 			File file = new File(this.incomingFolder, name);
 			if (file.isDirectory()) {
@@ -116,9 +120,14 @@ public class FolderWatcher {
 			}
 			NextFileContent nextFile = nextFileFactory.getNextFile(name, this);
 			moveFromIncomingFolder(nextFile.getErrorFolder(), nextFile.getName());
+			exit.reset();
 			return nextFile;
 		}
-		return new NextFileIdle(this);
+		if (exit.check()) {
+			return new NextFileExit();
+		} else {
+			return new NextFileIdle(this);
+		}
 	}
 
 	private void moveFromIncomingFolder(File errorFolder, String name) {
