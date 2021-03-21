@@ -8,4 +8,6 @@ public interface NextFileContent extends NextFile {
 
 	File getErrorFolder();
 
+	File getDoneFolder();
+
 }

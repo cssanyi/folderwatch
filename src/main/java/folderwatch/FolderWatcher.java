@@ -1,6 +1,9 @@
 package folderwatch;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 import folderwatch.nextfile.NextFile;
 import folderwatch.nextfile.NextFileContent;
@@ -118,9 +121,11 @@ public class FolderWatcher {
 			if (file.isDirectory()) {
 				continue;
 			}
-			NextFileContent nextFile = nextFileFactory.getNextFile(name, this);
-			moveFromIncomingFolder(nextFile.getErrorFolder(), nextFile.getName());
 			exit.reset();
+
+			NextFileContent nextFile = nextFileFactory.getNextFile(name, this);
+			moveFile(this.incomingFolder, nextFile.getErrorFolder(), name);
+
 			return nextFile;
 		}
 		if (exit.check()) {
@@ -130,12 +135,15 @@ public class FolderWatcher {
 		}
 	}
 
-	private void moveFromIncomingFolder(File errorFolder, String name) {
-		// TODO should be move instead of copy !!!
-		File source = new File(this.getIncomingFolder(), name);
-		File target = new File(errorFolder, name);
+	public void moveFile(File sourceFolder, File targetFolder, String name) {
+		File source = new File(sourceFolder, name);
+		File target = new File(targetFolder, name);
 
-		source.renameTo(target);
-		source.delete();
+		try {
+			Files.move(source.toPath(), target.toPath(), StandardCopyOption.ATOMIC_MOVE);
+		} catch (IOException e) {
+			throw new RuntimeException(new StringBuilder().append("Cant move ").append(source.getAbsolutePath())
+					.append(System.lineSeparator()).append(e.getLocalizedMessage()).toString());
+		}
 	}
 }

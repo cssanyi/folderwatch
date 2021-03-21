@@ -27,6 +27,11 @@ public class NextFileText implements NextFileContent {
 	}
 
 	@Override
+	public File getDoneFolder() {
+		return folderWatcher.getTextDoneFolder();
+	}
+
+	@Override
 	public NextFile process() {
 		return folderWatcher.getNextFile();
 	}

@@ -25,6 +25,11 @@ public class NextFileUnknownType implements NextFileContent {
 	}
 
 	@Override
+	public File getDoneFolder() {
+		return folderWatcher.getUnknownTypeFolder();
+	}
+
+	@Override
 	public NextFile process() {
 		return folderWatcher.getNextFile();
 	}
