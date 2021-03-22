@@ -135,12 +135,12 @@ public class FolderWatcher {
 		}
 	}
 
-	public void moveFile(File sourceFolder, File targetFolder, String name) {
+	public synchronized void moveFile(File sourceFolder, File targetFolder, String name) {
 		File source = new File(sourceFolder, name);
 		File target = new File(targetFolder, name);
 
 		try {
-			Files.move(source.toPath(), target.toPath(), StandardCopyOption.ATOMIC_MOVE);
+			Files.move(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
 			throw new RuntimeException(new StringBuilder().append("Cant move ").append(source.getAbsolutePath())
 					.append(System.lineSeparator()).append(e.getLocalizedMessage()).toString());
