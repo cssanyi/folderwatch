@@ -8,8 +8,9 @@ import java.util.Arrays;
 import javax.imageio.ImageIO;
 
 import folderwatch.FolderWatcher;
+import folderwatch.nextfile.control.NextFileControl;
 
-public class NextFileImage implements NextFileContent {
+public class NextFileImage implements NextFile {
 
 	private FolderWatcher folderWatcher;
 	private String name;
@@ -36,7 +37,7 @@ public class NextFileImage implements NextFileContent {
 	}
 
 	@Override
-	public NextFile process() {
+	public NextFileControl process() {
 		try {
 			BufferedImage image = ImageIO.read(new File(folderWatcher.getImageErrorFolder(), name));
 

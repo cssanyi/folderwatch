@@ -1,7 +1,7 @@
 package folderwatch.nextfile.factory;
 
 import folderwatch.FolderWatcher;
-import folderwatch.nextfile.NextFileContent;
+import folderwatch.nextfile.NextFile;
 import folderwatch.nextfile.NextFileImage;
 import folderwatch.nextfile.NextFileText;
 import folderwatch.nextfile.NextFileUnknownType;
@@ -21,7 +21,7 @@ public class NextFileFactory {
 		return instance;
 	}
 
-	public NextFileContent getNextFile(String name, FolderWatcher folderWatcher) {
+	public NextFile getNextFile(String name, FolderWatcher folderWatcher) {
 		if (name.length() > 4 && name.endsWith(".txt")) {
 			return new NextFileText(folderWatcher, name, wordPairOccurenceThreshold);
 		}

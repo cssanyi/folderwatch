@@ -1,11 +1,15 @@
 package folderwatch.nextfile;
 
-public interface NextFile {
+import java.io.File;
 
-	default boolean processable() {
-		return true;
-	}
+import folderwatch.nextfile.control.NextFileControl;
 
-	NextFile process();
+public interface NextFile extends NextFileControl {
+
+	String getName();
+
+	File getErrorFolder();
+
+	File getDoneFolder();
 
 }

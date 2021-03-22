@@ -15,8 +15,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
 import folderwatch.FolderWatcher;
+import folderwatch.nextfile.control.NextFileControl;
 
-public class NextFileText implements NextFileContent {
+public class NextFileText implements NextFile {
 
 	private FolderWatcher folderWatcher;
 	private String name;
@@ -44,7 +45,7 @@ public class NextFileText implements NextFileContent {
 	}
 
 	@Override
-	public NextFile process() {
+	public NextFileControl process() {
 		try (BufferedReader reader = new BufferedReader(
 				new FileReader(new File(this.getErrorFolder(), this.name), Charset.forName("UTF-8")));
 				PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(

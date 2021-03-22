@@ -3,8 +3,9 @@ package folderwatch.nextfile;
 import java.io.File;
 
 import folderwatch.FolderWatcher;
+import folderwatch.nextfile.control.NextFileControl;
 
-public class NextFileUnknownType implements NextFileContent {
+public class NextFileUnknownType implements NextFile {
 
 	private FolderWatcher folderWatcher;
 	private String name;
@@ -30,7 +31,7 @@ public class NextFileUnknownType implements NextFileContent {
 	}
 
 	@Override
-	public NextFile process() {
+	public NextFileControl process() {
 		return folderWatcher.getNextFile();
 	}
 

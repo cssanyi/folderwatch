@@ -6,9 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
 import folderwatch.nextfile.NextFile;
-import folderwatch.nextfile.NextFileContent;
-import folderwatch.nextfile.NextFileExit;
-import folderwatch.nextfile.NextFileIdle;
+import folderwatch.nextfile.control.NextFileControl;
+import folderwatch.nextfile.control.NextFileExit;
+import folderwatch.nextfile.control.NextFileIdle;
 import folderwatch.nextfile.factory.NextFileFactory;
 
 public class FolderWatcher {
@@ -112,7 +112,7 @@ public class FolderWatcher {
 		}
 	}
 
-	public synchronized NextFile getNextFile() {
+	public synchronized NextFileControl getNextFile() {
 		if (exit.activated()) {
 			return new NextFileExit();
 		}
@@ -123,7 +123,7 @@ public class FolderWatcher {
 			}
 			exit.reset();
 
-			NextFileContent nextFile = nextFileFactory.getNextFile(name, this);
+			NextFile nextFile = nextFileFactory.getNextFile(name, this);
 			moveFile(this.incomingFolder, nextFile.getErrorFolder(), name);
 
 			return nextFile;

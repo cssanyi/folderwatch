@@ -1,7 +1,7 @@
 package folderwatch;
 
-import folderwatch.nextfile.NextFile;
-import folderwatch.nextfile.NextFileStarter;
+import folderwatch.nextfile.control.NextFileControl;
+import folderwatch.nextfile.control.NextFileStarter;
 
 public class FolderWatch implements Runnable {
 
@@ -21,7 +21,7 @@ public class FolderWatch implements Runnable {
 
 	@Override
 	public void run() {
-		NextFile nextFile = new NextFileStarter(this.folderWatcher);
+		NextFileControl nextFile = new NextFileStarter(this.folderWatcher);
 
 		while (nextFile.processable()) {
 			nextFile = nextFile.process();

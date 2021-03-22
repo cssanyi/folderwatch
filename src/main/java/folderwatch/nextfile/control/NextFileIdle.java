@@ -1,8 +1,8 @@
-package folderwatch.nextfile;
+package folderwatch.nextfile.control;
 
 import folderwatch.FolderWatcher;
 
-public class NextFileIdle implements NextFile {
+public class NextFileIdle implements NextFileControl {
 
 	private FolderWatcher folderWatcher;
 
@@ -11,7 +11,7 @@ public class NextFileIdle implements NextFile {
 	}
 
 	@Override
-	public NextFile process() {
+	public NextFileControl process() {
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {

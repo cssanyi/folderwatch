@@ -1,8 +1,8 @@
-package folderwatch.nextfile;
+package folderwatch.nextfile.control;
 
 import folderwatch.FolderWatcher;
 
-public class NextFileStarter implements NextFile {
+public class NextFileStarter implements NextFileControl {
 
 	private FolderWatcher folderWatcher;
 
@@ -11,7 +11,7 @@ public class NextFileStarter implements NextFile {
 	}
 
 	@Override
-	public NextFile process() {
+	public NextFileControl process() {
 		return folderWatcher.getNextFile();
 	}
 
